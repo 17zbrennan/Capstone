@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4012004926825232}
   - component: {fileID: 65597929781644060}
+  - component: {fileID: 114500314494310666}
   m_Layer: 0
   m_Name: Punch
   m_TagString: DamageSource
@@ -52,3 +53,35 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114500314494310666
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1217406360664242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 137
+    i1: 20
+    i2: 255
+    i3: 18
+    i4: 254
+    i5: 203
+    i6: 207
+    i7: 4
+    i8: 40
+    i9: 189
+    i10: 76
+    i11: 159
+    i12: 95
+    i13: 92
+    i14: 122
+    i15: 137
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
