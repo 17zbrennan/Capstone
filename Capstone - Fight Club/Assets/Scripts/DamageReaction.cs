@@ -5,13 +5,12 @@ using UnityEngine.Networking;
 public class DamageReaction : NetworkBehaviour {
 
     private NetworkAnimator netAnim;
-    private NetworkIdentity netIdentity;
     private float damageRecieved;
     private Rigidbody rb;
 
     void Start()
     {
-        netIdentity = GetComponent<NetworkIdentity>();
+      
         netAnim = GetComponent<NetworkAnimator>();
         rb = this.GetComponent<Rigidbody>();
         damageRecieved = 0;
@@ -19,6 +18,7 @@ public class DamageReaction : NetworkBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
+      
         if (other.gameObject.tag == "DamageSource")
         {
             if (other.gameObject.name == "Punch(Clone)")

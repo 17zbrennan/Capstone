@@ -13,6 +13,7 @@ public class PlayerController : NetworkBehaviour
     private bool punch;
     private GameObject temp;
 
+    [SerializeField]
     public GameObject punchBox;
     public float jumpHeight;
     public float speed;
@@ -53,22 +54,20 @@ public class PlayerController : NetworkBehaviour
             Punching();
         }
     }
-
+    [Client]
     void Punching()
     {
         if (Input.GetKeyDown(KeyCode.Space) && punch == false)
         {
-            temp = Instantiate(punchBox, new Vector3(transform.position.x + punchDirection, transform.position.y + 2, transform.position.z), Quaternion.identity);
-            temp.transform.parent = this.transform;
-            netAnim.SetTrigger("isPunching");
-            punch = true;
-            StopCoroutine("Punch");
-            StartCoroutine("Punch");
-
+                netAnim.SetTrigger("isPunching");
+                punch = true;
+                CmdPunch(new Vector3(transform.position.x + punchDirection, transform.position.y + 2, transform.position.z), this.gameObject);
         }
-
     }
-
+    public void SetPunch(bool p)
+    {
+        punch = p;
+    }
     void Jumping()
     {
         if (Input.GetKeyDown(KeyCode.W) && jumpAmount > 0)
@@ -103,13 +102,20 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-   
-    IEnumerator Punch()
-    {
-        yield return new WaitForSeconds(1.4f);
-        punch = false;
-        Destroy(temp);
-        yield return null;
 
+
+    [Command]
+    void CmdPunch(Vector3 spawn, GameObject parent)
+    {
+        temp = (GameObject)Instantiate(punchBox,spawn, Quaternion.identity);
+        temp.transform.parent = parent.transform;
+        NetworkServer.Spawn(temp);
+        RpcFix(parent, temp);
+    }
+
+    [ClientRpc]
+    void RpcFix(GameObject p, GameObject t)
+    {
+        t.transform.parent = p.transform;
     }
 }

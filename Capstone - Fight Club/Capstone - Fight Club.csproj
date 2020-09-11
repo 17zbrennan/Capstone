@@ -221,6 +221,9 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2017.4.14f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="I18N">
+      <HintPath>Assets/Plugins/I18N.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Data.Sqlite">
       <HintPath>Assets/Plugins/Mono.Data.Sqlite.dll</HintPath>
     </Reference>
@@ -236,11 +239,9 @@
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/17zbr/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
-    <Reference Include="I18N">
-      <HintPath>Assets/Plugins/I18N.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\DestroyThisObject.cs" />
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Outside Assets\AllSkyFree\AllSkyFree_Menu.cs" />
     <Compile Include="Assets\Scripts\DamageReaction.cs" />
