@@ -744,7 +744,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1150174257865120}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.3, z: 0}
+  m_LocalPosition: {x: 1309.875, y: 422.86215, z: -1322.5637}
   m_LocalScale: {x: 0.08, y: 0.08, z: 0.08}
   m_Children:
   - {fileID: 4370228015486832}
@@ -975,6 +975,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05da1e8f20019564bbdc98a958e9b80c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cactusAttacktus: {fileID: 1831582189880436, guid: c808071fd6e0bc14fa5fcb898c0ef96d,
+    type: 2}
   punchBox: {fileID: 1217406360664242, guid: 8914ff12fecbcf0428bd4c9f5f5c7a89, type: 2}
   jumpHeight: 40
   speed: 40

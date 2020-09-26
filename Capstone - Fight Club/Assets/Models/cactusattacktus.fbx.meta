@@ -1,0 +1,225 @@
+fileFormatVersion: 2
+guid: 6ec7f91e69fdcc441a47fa480a6e3708
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Cactus
+    100002: //RootNode
+    100004: Camera
+    100006: Light
+    100008: Spikes.001
+    100010: Spikes.002
+    100012: Spikes.003
+    100014: Spikes.006
+    100016: Spikes.007
+    100018: Spikes.008
+    100020: Spikes.009
+    100022: Spikes.010
+    100024: Spikes.011
+    100026: Spikes.012
+    400000: Cactus
+    400002: //RootNode
+    400004: Camera
+    400006: Light
+    400008: Spikes.001
+    400010: Spikes.002
+    400012: Spikes.003
+    400014: Spikes.006
+    400016: Spikes.007
+    400018: Spikes.008
+    400020: Spikes.009
+    400022: Spikes.010
+    400024: Spikes.011
+    400026: Spikes.012
+    2000000: Camera
+    2100000: Material.001
+    2100002: Material.005
+    2100004: Material.017
+    2100006: Material.016
+    2100008: Material.015
+    2100010: Material.014
+    2100012: Material.013
+    2100014: Material.012
+    2100016: Material.011
+    2100018: Material.010
+    2100020: Material.008
+    2100022: Material.002
+    2100024: Material.003
+    2100026: Material.004
+    2100028: Material.006
+    2100030: Material.007
+    2100032: Material.009
+    2100034: Material.026
+    2100036: Material.025
+    2100038: Material.024
+    2100040: Material.023
+    2100042: Material.022
+    2100044: Material.021
+    2100046: Material.020
+    2100048: Material.019
+    2100050: Material.018
+    2100052: Material.035
+    2100054: Material.034
+    2100056: Material.033
+    2100058: Material.032
+    2100060: Material.031
+    2100062: Material.030
+    2100064: Material.029
+    2100066: Material.028
+    2100068: Material.027
+    2100070: Material.062
+    2100072: Material.061
+    2100074: Material.060
+    2100076: Material.059
+    2100078: Material.058
+    2100080: Material.057
+    2100082: Material.056
+    2100084: Material.055
+    2100086: Material.054
+    2100088: Material.053
+    2100090: Material.052
+    2100092: Material.051
+    2100094: Material.050
+    2100096: Material.049
+    2100098: Material.048
+    2100100: Material.047
+    2100102: Material.046
+    2100104: Material.045
+    2100106: Material.071
+    2100108: Material.070
+    2100110: Material.069
+    2100112: Material.068
+    2100114: Material.067
+    2100116: Material.066
+    2100118: Material.065
+    2100120: Material.064
+    2100122: Material.063
+    2100124: Material.086
+    2100126: Material.085
+    2100128: Material.084
+    2100130: Material.083
+    2100132: Material.082
+    2100134: Material.081
+    2100136: Material.080
+    2100138: Material.079
+    2100140: Material.078
+    2100142: Material.077
+    2100144: Material.076
+    2100146: Material.075
+    2100148: Material.074
+    2100150: Material.073
+    2100152: Material.072
+    2300000: Cactus
+    2300002: Spikes.001
+    2300004: Spikes.002
+    2300006: Spikes.003
+    2300008: Spikes.006
+    2300010: Spikes.007
+    2300012: Spikes.008
+    2300014: Spikes.009
+    2300016: Spikes.010
+    2300018: Spikes.011
+    2300020: Spikes.012
+    3300000: Cactus
+    3300002: Spikes.001
+    3300004: Spikes.002
+    3300006: Spikes.003
+    3300008: Spikes.006
+    3300010: Spikes.007
+    3300012: Spikes.008
+    3300014: Spikes.009
+    3300016: Spikes.010
+    3300018: Spikes.011
+    3300020: Spikes.012
+    4300000: Cactus
+    4300002: Spikes.003
+    4300004: Spikes.006
+    4300006: Spikes.007
+    4300008: Spikes.008
+    4300010: Spikes.009
+    4300012: Spikes.011
+    4300014: Spikes.010
+    4300016: Spikes.012
+    4300018: Spikes.002
+    4300020: Spikes.001
+    10800000: Light
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

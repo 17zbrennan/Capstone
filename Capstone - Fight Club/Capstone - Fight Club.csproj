@@ -242,6 +242,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Outside Assets\AllSkyFree\AllSkyFree_Menu.cs" />
+    <Compile Include="Assets\Scripts\CactusSpecial.cs" />
     <Compile Include="Assets\Scripts\DamageReaction.cs" />
     <Compile Include="Assets\Scripts\DatabaseController.cs" />
     <Compile Include="Assets\Scripts\DestroyThisObject.cs" />

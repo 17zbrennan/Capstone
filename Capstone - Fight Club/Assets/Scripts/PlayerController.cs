@@ -12,7 +12,12 @@ public class PlayerController : NetworkBehaviour
     private float punchDirection;
     private bool punch;
     private GameObject temp;
+    private bool attack;
+    private Vector3 spawn;
+    private float gravity;
 
+    [SerializeField]
+    public GameObject cactusAttacktus;
     [SerializeField]
     public GameObject punchBox;
     public float jumpHeight;
@@ -20,7 +25,9 @@ public class PlayerController : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
- 
+        gravity = 9.81f;
+        spawn = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
+        attack = false;
         punchDirection = 1.5f;
         jumpAmount = 3;
         rb = this.GetComponent<Rigidbody>();
@@ -32,8 +39,10 @@ public class PlayerController : NetworkBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+       
         if (isLocalPlayer)
         {
+            rb.AddForce(new Vector3(0, -1 * gravity));
             //Movement inputs
             hInput = Input.GetAxis("Horizontal");
             ScaleFlip();
@@ -51,6 +60,7 @@ public class PlayerController : NetworkBehaviour
             }
 
             Jumping();
+            Attack();
             Punching();
         }
     }
@@ -64,9 +74,23 @@ public class PlayerController : NetworkBehaviour
                 CmdPunch(new Vector3(transform.position.x + punchDirection, transform.position.y + 2, transform.position.z), this.gameObject);
         }
     }
+    [Client]
+    void Attack()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && attack == false)
+        {
+            attack = true;
+            CmdAttack(new Vector3(transform.position.x, transform.position.y, transform.position.z), this.gameObject);
+        }
+    }
     public void SetPunch(bool p)
     {
         punch = p;
+    }
+    public void SetAttack()
+    {
+        StartCoroutine("Cooldown");
+        //StopCoroutine("Cooldown");
     }
     void Jumping()
     {
@@ -93,6 +117,13 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "PlayArea")
+        {
+            StartCoroutine("Respawn");
+        }
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -101,8 +132,31 @@ public class PlayerController : NetworkBehaviour
             jumpAmount = 3;
         }
     }
+    IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(10.0f);
+        attack = false;
+        yield return null;
+    }
 
+    IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(2.0f);
+        this.gameObject.transform.position = spawn;
+        DamageReaction damage = this.GetComponent<DamageReaction>();
+        damage.SetDamage(0.0f);
+        damage.IncrementDeaths();
+        yield return null;
+    }   
 
+    [Command]
+    void CmdAttack(Vector3 spawn, GameObject parent)
+    {
+        temp = (GameObject)Instantiate(cactusAttacktus, spawn, Quaternion.identity);
+        temp.transform.parent = parent.transform;
+        NetworkServer.Spawn(temp);
+        RpcFix(parent, temp);
+    }
 
     [Command]
     void CmdPunch(Vector3 spawn, GameObject parent)
