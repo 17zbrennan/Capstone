@@ -19,17 +19,24 @@ public class DamageReaction : NetworkBehaviour {
     {
 
         canvas = GameObject.Find("/PlayerStats");
-        stats = transform.Find("Stats");
-        stats.GetComponent<CharacterExist>().player = this.gameObject;
-        stats.transform.SetParent(canvas.transform);
+        
         deaths = 0;    
         netAnim = GetComponent<NetworkAnimator>();
         rb = this.GetComponent<Rigidbody>();
         damageReceived = 0;
     }
-    
+    private void Start()
+    {
+        stats = transform.Find("Stats");
+        stats.GetComponent<CharacterExist>().player = this.gameObject;
+        stats.transform.SetParent(canvas.transform);
+    }
     private void Update()
     {
+        if (transform.Find("Fire(Clone)"))
+        {
+            transform.Find("Fire(Clone)").transform.SetParent(GameObject.Find("/TempParent").transform);
+        }
         stats.transform.Find("Damage").GetComponent<Text>().text = "Damage: " + (int)damageReceived;
         stats.transform.Find("Deaths").GetComponent<Text>().text = "Deaths: " + (int)deaths;
 
@@ -39,20 +46,28 @@ public class DamageReaction : NetworkBehaviour {
       
         if (other.gameObject.tag == "DamageSource" && other.gameObject.transform.IsChildOf(this.transform) == false && iFrame == false)
         {
-            if (other.gameObject.name == "Punch(Clone)")
+            if (other.gameObject.name == "Punch(Clone)" || other.gameObject.name == "Spear(Clone)")
             {
                 netAnim.SetTrigger("isHit");
                 damageReceived += Random.Range(6.0f, 15.0f);
-                rb.AddForce(new Vector3(Random.Range(-20.0f, 20.0f) * damageReceived/3, 20 * damageReceived/3));
+                rb.AddForce(new Vector3(Random.Range(-20.0f, 20.0f) * damageReceived/2, 20 * damageReceived/2));
                 Destroy(other.gameObject.GetComponent<BoxCollider>());
             }
 
             if(other.gameObject.name == "cactusattacktus(Clone)")
             {
                 netAnim.SetTrigger("isHit");
-                damageReceived += Random.Range(20.0f, 35.0f);
-                rb.AddForce(new Vector3(Random.Range(-20.0f, 20.0f) * damageReceived / 3, 20 * damageReceived / 3));
+                damageReceived += Random.Range(25.0f, 35.0f);
+                rb.AddForce(new Vector3(Random.Range(-20.0f, 20.0f) * damageReceived / 2, 20 * damageReceived / 2));
                 Destroy(other.gameObject.GetComponent<SphereCollider>());
+            }
+
+            if (other.gameObject.name == "Fireball")
+            {
+                netAnim.SetTrigger("isHit");
+                damageReceived += Random.Range(20.0f, 25.0f);
+                rb.AddForce(new Vector3(Random.Range(-20.0f, 20.0f) * damageReceived / 2, 20 * damageReceived / 2));
+                Destroy(other.gameObject);
             }
             iFrame = true;
             StartCoroutine("ImmunityFrame");

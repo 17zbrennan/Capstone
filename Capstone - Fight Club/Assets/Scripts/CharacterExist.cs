@@ -10,7 +10,7 @@ public class CharacterExist : MonoBehaviour
     private void Start()
     {
         this.transform.localScale = new Vector3(-1, 1, 0);
-        this.transform.position = new Vector2(7, 10);
+        this.transform.position = new Vector2(7, 15);
     }
     // Update is called once per frame
     void Update() {

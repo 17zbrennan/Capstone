@@ -244,11 +244,14 @@
     <Compile Include="Assets\Outside Assets\AllSkyFree\AllSkyFree_Menu.cs" />
     <Compile Include="Assets\Scripts\CactusSpecial.cs" />
     <Compile Include="Assets\Scripts\CharacterExist.cs" />
+    <Compile Include="Assets\Scripts\CustomNetwork.cs" />
     <Compile Include="Assets\Scripts\DamageReaction.cs" />
     <Compile Include="Assets\Scripts\DatabaseController.cs" />
     <Compile Include="Assets\Scripts\DestroyThisObject.cs" />
+    <Compile Include="Assets\Scripts\Fire.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\PlayerSelect.cs" />
     <Compile Include="Assets\Scripts\SceneNavigation.cs" />
     <Compile Include="Assets\Scripts\Songs.cs" />
   </ItemGroup>

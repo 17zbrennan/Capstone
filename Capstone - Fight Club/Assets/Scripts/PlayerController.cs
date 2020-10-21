@@ -9,7 +9,6 @@ public class PlayerController : NetworkBehaviour
     private NetworkAnimator netAnim;
     private float hInput;
     private float jumpAmount;
-    private float punchDirection;
     private bool punch;
     private GameObject temp;
     private bool attack;
@@ -17,11 +16,12 @@ public class PlayerController : NetworkBehaviour
     private float gravity;
 
     [SerializeField]
-    public GameObject cactusAttacktus;
+    public GameObject specialAttack;
     [SerializeField]
     public GameObject punchBox;
     public float jumpHeight;
     public float speed;
+    public float punchDirection;
     // Use this for initialization
     void Start()
     {
@@ -80,16 +80,16 @@ public class PlayerController : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.E) && attack == false)
         {
             attack = true;
-            CmdAttack(new Vector3(transform.position.x, transform.position.y, transform.position.z), this.gameObject);
+            CmdAttack(new Vector3(transform.position.x, transform.position.y+2, transform.position.z), this.gameObject);
         }
     }
     public void SetPunch(bool p)
     {
         punch = p;
     }
-    public void SetAttack()
+    public void SetAttack(int c)
     {
-        StartCoroutine("Cooldown");
+        StartCoroutine(Cooldown(c));
         //StopCoroutine("Cooldown");
     }
     void Jumping()
@@ -132,7 +132,7 @@ public class PlayerController : NetworkBehaviour
             jumpAmount = 3;
         }
     }
-    IEnumerator Cooldown()
+    IEnumerator Cooldown(int c)
     {
         yield return new WaitForSeconds(10.0f);
         attack = false;
@@ -152,7 +152,7 @@ public class PlayerController : NetworkBehaviour
     [Command]
     void CmdAttack(Vector3 spawn, GameObject parent)
     {
-        temp = (GameObject)Instantiate(cactusAttacktus, spawn, Quaternion.identity);
+        temp = (GameObject)Instantiate(specialAttack, spawn, Quaternion.identity);
         temp.transform.parent = parent.transform;
         NetworkServer.Spawn(temp);
         RpcFix(parent, temp);

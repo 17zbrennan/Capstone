@@ -421,6 +421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9384f46a448e39d44910b0a2c9433909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  devilMan: {fileID: 1901723538799722, guid: e35c655991333a148b36c53d91e45c06, type: 2}
+  cactusMan: {fileID: 1150174257865120, guid: 37a61f3a951148a4c936dea79c2f855e, type: 2}
 --- !u!82 &491639744
 AudioSource:
   m_ObjectHideFlags: 0

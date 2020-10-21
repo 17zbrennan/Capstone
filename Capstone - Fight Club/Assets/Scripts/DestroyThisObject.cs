@@ -4,23 +4,29 @@ using UnityEngine;
 using UnityEngine.Networking;
 public class DestroyThisObject : NetworkBehaviour {
     public float time;
-    private GameObject parent;
+    private GameObject parentObject;
 	// Use this for initialization
 	void Start () {
-        parent = this.transform.parent.gameObject;
+        parentObject = this.transform.parent.gameObject;
         StartCoroutine("Attack");
-	}
+    }
+
 
     IEnumerator Attack()
     {
-        PlayerController p = parent.GetComponent<PlayerController>();
-        if (this.gameObject.name == "Punch(Clone)")
+        PlayerController p = parentObject.GetComponent<PlayerController>();
+        if (this.gameObject.name == "Punch(Clone)" || this.gameObject.name == "Spear(Clone)")
         {
             p.SetPunch(false);
         }
         else if (this.gameObject.name == "cactusattacktus(Clone)")
         {
-            p.SetAttack();
+            p.SetAttack(10);
+        }
+        else if (this.gameObject.name == "Fire(Clone)")
+        {
+            
+            p.SetAttack(8);
         }
         yield return new WaitForSeconds(time);
         NetworkServer.Destroy(this.gameObject);
