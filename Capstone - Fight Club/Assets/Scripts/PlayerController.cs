@@ -15,6 +15,7 @@ public class PlayerController : NetworkBehaviour
     private Vector3 spawn;
     private float gravity;
 
+
     [SerializeField]
     public GameObject specialAttack;
     [SerializeField]
@@ -58,7 +59,6 @@ public class PlayerController : NetworkBehaviour
             {
                 anim.SetBool("isWalking", false);
             }
-
             Jumping();
             Attack();
             Punching();

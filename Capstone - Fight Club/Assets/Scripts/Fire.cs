@@ -16,11 +16,11 @@ public class Fire: MonoBehaviour {
         
             if (direction == "right")
             {
-                rb.AddForce(new Vector2(1, 0) * 5);
+                rb.AddForce(new Vector2(1, 0) * 7);
             }
             else
             {
-                rb.AddForce(new Vector2(-1, 0) * 5);
+                rb.AddForce(new Vector2(-1, 0) * 7);
             }
     }
 }

@@ -7,9 +7,9 @@ public class DamageReaction : NetworkBehaviour {
 
     private NetworkAnimator netAnim;
     [SyncVar]
-    private float damageReceived;
+    public float damageReceived;
     [SyncVar]
-    private float deaths;
+    public float deaths;
     private Rigidbody rb;
     private Transform stats;
     private GameObject canvas;
@@ -19,7 +19,6 @@ public class DamageReaction : NetworkBehaviour {
     {
 
         canvas = GameObject.Find("/PlayerStats");
-        
         deaths = 0;    
         netAnim = GetComponent<NetworkAnimator>();
         rb = this.GetComponent<Rigidbody>();
@@ -30,6 +29,7 @@ public class DamageReaction : NetworkBehaviour {
         stats = transform.Find("Stats");
         stats.GetComponent<CharacterExist>().player = this.gameObject;
         stats.transform.SetParent(canvas.transform);
+
     }
     private void Update()
     {
@@ -37,8 +37,18 @@ public class DamageReaction : NetworkBehaviour {
         {
             transform.Find("Fire(Clone)").transform.SetParent(GameObject.Find("/TempParent").transform);
         }
-        stats.transform.Find("Damage").GetComponent<Text>().text = "Damage: " + (int)damageReceived;
-        stats.transform.Find("Deaths").GetComponent<Text>().text = "Deaths: " + (int)deaths;
+        if (isLocalPlayer)
+        {
+            //CmdSync(damageReceived, deaths);
+            stats.transform.Find("Damage").GetComponent<Text>().text = "Damage: " + (int)damageReceived;
+            stats.transform.Find("Deaths").GetComponent<Text>().text = "Deaths: " + (int)deaths;
+        }
+        else
+        {
+            stats.transform.gameObject.SetActive(false);
+        }
+        
+
 
     }
     private void OnTriggerEnter(Collider other)
@@ -50,7 +60,7 @@ public class DamageReaction : NetworkBehaviour {
             {
                 netAnim.SetTrigger("isHit");
                 damageReceived += Random.Range(6.0f, 15.0f);
-                rb.AddForce(new Vector3(Random.Range(-20.0f, 20.0f) * damageReceived/2, 20 * damageReceived/2));
+                rb.AddForce(new Vector3(Random.Range(-20.0f, 20.0f) * damageReceived, 20 * damageReceived));
                 Destroy(other.gameObject.GetComponent<BoxCollider>());
             }
 
@@ -58,7 +68,7 @@ public class DamageReaction : NetworkBehaviour {
             {
                 netAnim.SetTrigger("isHit");
                 damageReceived += Random.Range(25.0f, 35.0f);
-                rb.AddForce(new Vector3(Random.Range(-20.0f, 20.0f) * damageReceived / 2, 20 * damageReceived / 2));
+                rb.AddForce(new Vector3(Random.Range(-20.0f, 20.0f) * damageReceived, 20 * damageReceived));
                 Destroy(other.gameObject.GetComponent<SphereCollider>());
             }
 
@@ -66,8 +76,8 @@ public class DamageReaction : NetworkBehaviour {
             {
                 netAnim.SetTrigger("isHit");
                 damageReceived += Random.Range(20.0f, 25.0f);
-                rb.AddForce(new Vector3(Random.Range(-20.0f, 20.0f) * damageReceived / 2, 20 * damageReceived / 2));
-                Destroy(other.gameObject);
+                rb.AddForce(new Vector3(Random.Range(-20.0f, 20.0f) * damageReceived, 20 * damageReceived));
+                Destroy(other.gameObject.GetComponent<SphereCollider>());
             }
             iFrame = true;
             StartCoroutine("ImmunityFrame");
@@ -97,4 +107,19 @@ public class DamageReaction : NetworkBehaviour {
     {
         return deaths;
     }
+
+   [Command]
+    void CmdSync(float currentDamage, float currentDeaths)
+    {
+        deaths = currentDeaths;
+        damageReceived = currentDamage;
+        RpcSync(currentDamage, currentDeaths);
+    }
+    [ClientRpc]
+    void RpcSync(float currentDamage, float currentDeaths)
+    {
+        deaths = currentDeaths;
+        damageReceived = currentDamage;
+    }
+
 }
