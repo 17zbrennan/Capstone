@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿//Zachary Brennan; 11/20
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,10 +12,12 @@ public class PlayerSelect : MonoBehaviour {
 
     public void ChangeUI()
     {
+        //Sets character for the main character 
         if(thisUI.name == "CharacterUI")
         {
             CustomNetwork n = netManager.GetComponent<CustomNetwork>(); ;
             string name = this.gameObject.name;
+            //Sends the character they picked
             switch (name)
             {
                 case "CactusMan":
@@ -26,6 +29,7 @@ public class PlayerSelect : MonoBehaviour {
                     break;
             }
         }
+        //changes the menu 
         otherUI.SetActive(true);
         thisUI.SetActive(false);
         

@@ -1,17 +1,15 @@
-﻿using System.Collections;
+﻿//Zachary Brennan; 11/20
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     public static GameManager instance = null;
-    public GameObject devilMan;
-    public GameObject cactusMan;
-    private GameObject player;
     private AudioSource music;
     void Awake()
     {
-       
         //Makes sure this stays as a singleton 
         if (instance == null)
             instance = this;
@@ -23,26 +21,21 @@ public class GameManager : MonoBehaviour {
     }
     private void Start()
     {
-        player = null;
         music = this.GetComponent<AudioSource>();
     }
-    public GameObject GetCharacter()
-    {
-        return player;
-    }
-    public void SetCharacter(string name)
-    {
-        if(name == "Cactus Man")
-        {
-            
 
-        }
-        else if (name == "Devil Man")
+    //Resets the network manager
+    private void Update()
+    {
+        if(SceneManager.GetActiveScene().name == "MainMenu")
         {
-           
-  
+            if(GameObject.Find("NetworkManager") == true)
+            {
+                Destroy(GameObject.Find("NetworkManager"));
+            }
         }
     }
+    // Changes the music when the music choice changes
     public void PlayMusic(string audioPath)
     {      
         AudioClip clip = Resources.Load<AudioClip>(audioPath);
@@ -50,5 +43,4 @@ public class GameManager : MonoBehaviour {
         music.clip = clip;
         music.Play();
     }
-
 }

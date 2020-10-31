@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿//Zachary Brennan; 11/20
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Songs {
 
-
+    //Song Class that saves the song's information
     public string SongName;
 
     public string SongArtist;

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿//Zachary Brennan; 11/2020
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -11,7 +12,7 @@ public class DestroyThisObject : NetworkBehaviour {
         StartCoroutine("Attack");
     }
 
-
+    //Attack based on the object
     IEnumerator Attack()
     {
         PlayerController p = parentObject.GetComponent<PlayerController>();

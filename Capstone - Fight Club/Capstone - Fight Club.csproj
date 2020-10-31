@@ -248,6 +248,7 @@
     <Compile Include="Assets\Scripts\DamageReaction.cs" />
     <Compile Include="Assets\Scripts\DatabaseController.cs" />
     <Compile Include="Assets\Scripts\DestroyThisObject.cs" />
+    <Compile Include="Assets\Scripts\DisconnectButton.cs" />
     <Compile Include="Assets\Scripts\Fire.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />

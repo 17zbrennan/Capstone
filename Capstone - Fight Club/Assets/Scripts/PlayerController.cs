@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿//Zachary Brennan; 11/2020
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -14,7 +15,7 @@ public class PlayerController : NetworkBehaviour
     private bool attack;
     private Vector3 spawn;
     private float gravity;
-
+    private bool outOfBounds;
 
     [SerializeField]
     public GameObject specialAttack;
@@ -26,6 +27,7 @@ public class PlayerController : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
+        outOfBounds = false;
         gravity = 9.81f;
         spawn = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
         attack = false;
@@ -43,25 +45,28 @@ public class PlayerController : NetworkBehaviour
        
         if (isLocalPlayer)
         {
-            rb.AddForce(new Vector3(0, -1 * gravity));
-            //Movement inputs
-            hInput = Input.GetAxis("Horizontal");
-            ScaleFlip();
-            //Vector 3 of the movement and moving the controller.
-            Vector3 movement = new Vector3(hInput, 0);
-            rb.AddForce(movement * speed);
+            if (outOfBounds == false)
+            {
+                rb.AddForce(new Vector3(0, -1 * gravity));
+                //Movement inputs
+                hInput = Input.GetAxis("Horizontal");
+                ScaleFlip();
+                //Vector 3 of the movement and moving the controller.
+                Vector3 movement = new Vector3(hInput, 0);
+                rb.AddForce(movement * speed);
 
-            if (hInput > 0 || hInput < 0)
-            {
-                anim.SetBool("isWalking", true);
+                if (hInput > 0 || hInput < 0)
+                {
+                    anim.SetBool("isWalking", true);
+                }
+                else
+                {
+                    anim.SetBool("isWalking", false);
+                }
+                Jumping();
+                Attack();
+                Punching();
             }
-            else
-            {
-                anim.SetBool("isWalking", false);
-            }
-            Jumping();
-            Attack();
-            Punching();
         }
     }
     [Client]
@@ -141,7 +146,9 @@ public class PlayerController : NetworkBehaviour
 
     IEnumerator Respawn()
     {
+        outOfBounds = true;
         yield return new WaitForSeconds(2.0f);
+        outOfBounds = false;
         this.gameObject.transform.position = spawn;
         DamageReaction damage = this.GetComponent<DamageReaction>();
         damage.SetDamage(0.0f);

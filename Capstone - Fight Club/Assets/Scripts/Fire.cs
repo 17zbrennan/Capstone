@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿//Zachary Brennan; 11/20
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -13,7 +14,7 @@ public class Fire: MonoBehaviour {
     }
     void FixedUpdate()
     {
-        
+        //Moves the fire in opposite directions
             if (direction == "right")
             {
                 rb.AddForce(new Vector2(1, 0) * 7);

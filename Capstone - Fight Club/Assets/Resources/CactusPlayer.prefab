@@ -1032,6 +1032,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ef53d6b3abe9ab488192af385d13332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageReceived: 0
+  deaths: 0
 --- !u!114 &114335598781603236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1092,7 +1094,8 @@ MonoBehaviour:
     type: 2}
   punchBox: {fileID: 1217406360664242, guid: 8914ff12fecbcf0428bd4c9f5f5c7a89, type: 2}
   jumpHeight: 40
-  speed: 40
+  speed: 45
+  punchDirection: 0
 --- !u!114 &114388930210751804
 MonoBehaviour:
   m_ObjectHideFlags: 1

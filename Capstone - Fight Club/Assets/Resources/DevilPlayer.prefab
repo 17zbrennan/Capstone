@@ -2029,7 +2029,7 @@ MonoBehaviour:
   specialAttack: {fileID: 1182260217301608, guid: c333c9e2fbd1abe4b8f912cbda9795e5,
     type: 2}
   punchBox: {fileID: 1590263302867302, guid: f6cf6e3796e03b243a6482d66a70eab0, type: 2}
-  jumpHeight: 40
+  jumpHeight: 45
   speed: 40
   punchDirection: 0
 --- !u!114 &114629498030949118
