@@ -10,20 +10,6 @@ using UnityEngine.Networking.NetworkSystem;
 
 public class CustomNetwork : NetworkManager {
     public string playerCharacter;
-    
-    //Information for Online Data
-    public void OnlineHost(Text t)
-    {
-        if(matchMaker == null)
-             StartMatchMaker();
-        matchMaker.CreateMatch(t.text,2,true,"","","",0,0,CreatedMatch);
-    }
-    //The listener for creating a match
-    private void CreatedMatch(bool success, string extendedInfo, MatchInfo responseData)
-    {
-        //Starts match with matchmaking data
-        base.StartHost(responseData);
-    }
 
     //Lan Hosting
     public void BecomeHost()
@@ -75,22 +61,4 @@ public class CustomNetwork : NetworkManager {
         }
         NetworkServer.AddPlayerForConnection(conn, temp, playerControllerId);
     }
-
-
-
-    //Refeshing the Online Match Info
-  /*  public void OnlineInfo()
-    {
-        if (!matchMaker)
-        {
-            StartMatchMaker();
-        }
-
-        matchMaker.ListMatches(0, 5, "", true, 0, 0, MatchLists);
-    }
-
-    private void MatchLists(bool success, string extendedInfo, List<MatchInfoSnapshot> responseData)
-    {
-       
-    }*/
 }

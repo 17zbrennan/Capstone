@@ -16,6 +16,7 @@ public class CactusSpecial : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //Looks for the local player, then calls attack.
         if (isLocalPlayer)
         {
             Attack();
@@ -25,6 +26,7 @@ public class CactusSpecial : NetworkBehaviour {
     [Client]
     void Attack()
     {
+        //Does input and then the sends it to the command
         if (Input.GetKeyDown(KeyCode.LeftArrow) && attack == false)
         {
             CmdAttack(new Vector3(transform.position.x, transform.position.y, transform.position.z), this.gameObject);
@@ -34,15 +36,19 @@ public class CactusSpecial : NetworkBehaviour {
     [Command]
     void CmdAttack(Vector3 spawn, GameObject parent)
     {
+        //Instantiates the ability and does changes the parent
         temp = (GameObject)Instantiate(cactusAttacktus, spawn, Quaternion.identity);
         temp.transform.parent = parent.transform;
+        //Spawns it.
         NetworkServer.Spawn(temp);
+        //Calls RPC
         RpcFix(parent, temp);
     }
 
     [ClientRpc]
     void RpcFix(GameObject p, GameObject t)
     {
+        //Changes the parent on both clients
         t.transform.parent = p.transform;
     }
 }

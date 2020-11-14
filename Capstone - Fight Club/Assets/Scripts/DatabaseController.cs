@@ -23,11 +23,13 @@ public class DatabaseController : MonoBehaviour {
         dropdown.AddOptions(dropdownList);
     }
 
+    //Changes Music
     private void Update()
     {
         PickMusic();
     }
 
+    //Goes through the array and gives it to the game manager
     private void PickMusic()
     {
         if (dropdown.value != currentSong )

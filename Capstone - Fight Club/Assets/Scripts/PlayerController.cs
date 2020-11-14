@@ -42,9 +42,10 @@ public class PlayerController : NetworkBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-       
+       //Checks if it is the local player
         if (isLocalPlayer)
         {
+            //Checks if its on the play field
             if (outOfBounds == false)
             {
                 rb.AddForce(new Vector3(0, -1 * gravity));
@@ -54,7 +55,7 @@ public class PlayerController : NetworkBehaviour
                 //Vector 3 of the movement and moving the controller.
                 Vector3 movement = new Vector3(hInput, 0);
                 rb.AddForce(movement * speed);
-
+                //Animation for walking
                 if (hInput > 0 || hInput < 0)
                 {
                     anim.SetBool("isWalking", true);
@@ -63,12 +64,14 @@ public class PlayerController : NetworkBehaviour
                 {
                     anim.SetBool("isWalking", false);
                 }
+                //Jump, Attack and punches
                 Jumping();
                 Attack();
                 Punching();
             }
         }
     }
+    //Method for punches, sends the info to a command (the server)
     [Client]
     void Punching()
     {
@@ -79,6 +82,7 @@ public class PlayerController : NetworkBehaviour
                 CmdPunch(new Vector3(transform.position.x + punchDirection, transform.position.y + 2, transform.position.z), this.gameObject);
         }
     }
+    //Method for special attacks, sends the info to a command (the server)
     [Client]
     void Attack()
     {
@@ -88,15 +92,18 @@ public class PlayerController : NetworkBehaviour
             CmdAttack(new Vector3(transform.position.x, transform.position.y+2, transform.position.z), this.gameObject);
         }
     }
+    //set for the punch variable
     public void SetPunch(bool p)
     {
         punch = p;
     }
+    //Set for the attack variable
     public void SetAttack(int c)
     {
         StartCoroutine(Cooldown(c));
         //StopCoroutine("Cooldown");
     }
+    //Determines the jumps
     void Jumping()
     {
         if (Input.GetKeyDown(KeyCode.W) && jumpAmount > 0)
@@ -105,7 +112,7 @@ public class PlayerController : NetworkBehaviour
             jumpAmount--;
         }
     }
-
+    //Switches the scale
     void ScaleFlip()
     {
         NetworkTransform t = this.GetComponent<NetworkTransform>();
@@ -121,7 +128,7 @@ public class PlayerController : NetworkBehaviour
             t.transform.rotation = Quaternion.Euler(new Vector3(0, 140, 0));
         }
     }
-
+    //Respawns if you leave the area
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "PlayArea")
@@ -129,7 +136,7 @@ public class PlayerController : NetworkBehaviour
             StartCoroutine("Respawn");
         }
     }
-
+    //Sets the jump amount back to 3
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Floor")
@@ -137,6 +144,7 @@ public class PlayerController : NetworkBehaviour
             jumpAmount = 3;
         }
     }
+    //Cooldown for abilitiy
     IEnumerator Cooldown(int c)
     {
         yield return new WaitForSeconds(10.0f);
@@ -144,6 +152,7 @@ public class PlayerController : NetworkBehaviour
         yield return null;
     }
 
+    //Respawns the player
     IEnumerator Respawn()
     {
         outOfBounds = true;
@@ -156,6 +165,7 @@ public class PlayerController : NetworkBehaviour
         yield return null;
     }   
 
+    //Command for the attack to synchronize to the server
     [Command]
     void CmdAttack(Vector3 spawn, GameObject parent)
     {
@@ -164,7 +174,7 @@ public class PlayerController : NetworkBehaviour
         NetworkServer.Spawn(temp);
         RpcFix(parent, temp);
     }
-
+    //Command for the attack to synchronize to the server
     [Command]
     void CmdPunch(Vector3 spawn, GameObject parent)
     {
@@ -173,7 +183,7 @@ public class PlayerController : NetworkBehaviour
         NetworkServer.Spawn(temp);
         RpcFix(parent, temp);
     }
-
+    //Client RPC, fixes the new information for both clients
     [ClientRpc]
     void RpcFix(GameObject p, GameObject t)
     {
